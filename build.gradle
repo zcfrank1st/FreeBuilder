@@ -68,9 +68,17 @@ String jackson(String pkg) {
       namespace, pkg, jacksonVersion)
 }
 
-tasks.withType(Test) {
-  testLogging {
-    events "passed", "skipped", "failed"
+test {
+  maxParallelForks = 4
+}
+
+if (System.env.CI == 'true') {
+  // Continuous integration environments may assume the build has
+  // hung if output stops.
+  tasks.withType(Test) {
+    testLogging {
+      events "passed", "skipped", "failed"
+    }
   }
 }
 
