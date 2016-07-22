@@ -1,6 +1,6 @@
 language: java
 install: ./gradlew clean jar
-script: ./gradlew check
+script: GRADLE_OPTS=-Xmx2048m ./gradlew check
 jdk:
   - oraclejdk8
 
